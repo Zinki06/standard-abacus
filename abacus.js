@@ -31,11 +31,16 @@ export class Abacus {
         if (type === 'five') {
             beads[0].classList.toggle('active');
         } else {
-            for (let i = 0; i <= index; i++) {
-                beads[i].classList.add('active');
-            }
-            for (let i = index + 1; i < beads.length; i++) {
-                beads[i].classList.remove('active');
+            if (beads[index].classList.contains('active')) {
+                // If the clicked bead is already active, deactivate it and all beads above it
+                for (let i = index; i < beads.length; i++) {
+                    beads[i].classList.remove('active');
+                }
+            } else {
+                // If the clicked bead is not active, activate it and all beads below it
+                for (let i = 0; i <= index; i++) {
+                    beads[i].classList.add('active');
+                }
             }
         }
     }
